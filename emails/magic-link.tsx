@@ -1,17 +1,10 @@
-import * as React from "react";
 import {
   Body,
   Container,
-  Head,
-  Heading,
-  Html,
-  Link,
-  Preview,
-  Text,
-  Button,
+  Head, Html,
+  Link, Text
 } from "@react-email/components";
 import { sendEmail } from "@/lib/email";
-import { toast } from "sonner";
 
 const MagicLinkEmailBody = ({ email, url }: { email: string; url: string }) => {
   return (
@@ -82,7 +75,8 @@ const MagicLinkEmailBody = ({ email, url }: { email: string; url: string }) => {
               fontFamily: "'Inter', sans-serif",
             }}
           >
-            To continue with your email on Startstack click on the button below.
+            To continue with your email on Linked In Growth System, click on the
+            button below.
           </Text>
           <Link
             style={{

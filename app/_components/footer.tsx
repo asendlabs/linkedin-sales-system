@@ -63,7 +63,7 @@ export function Footer() {
   return (
     <section className="md:px-30 flex w-screen flex-col items-center justify-between border-t border-border px-10 py-5 text-xs sm:px-20 md:flex-row md:text-sm lg:px-40 mt-auto">
       <div className="flex flex-col items-center gap-3 md:flex-row">
-        <span className="mr-3">© Startstack by Asend Labs | 2024</span>
+        <span className="mr-3">© LinkedIn Growth System by Flowmatic | 2025</span>
         {/* {footerLinks.map((link, index) => (
           <FooterLink key={index} {...link} />
         ))} */}

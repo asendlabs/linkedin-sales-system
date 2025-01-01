@@ -11,15 +11,10 @@ const env = createEnv({
     // Authentication credentials
     GOOGLE_CLIENT_ID: z.string().optional(),
     GOOGLE_CLIENT_SECRET: z.string().optional(),
-    GITHUB_CLIENT_ID: z.string().optional(),
-    GITHUB_CLIENT_SECRET: z.string().optional(),
     BETTER_AUTH_SECRET: z.string(),
 
     // API keys
     RESEND_API_KEY: z.string(),
-
-    // Payments
-    DODO_API_KEY: z.string(),
   },
 
   // Client-side public environment variables
@@ -42,8 +37,6 @@ const env = createEnv({
     // Authentication credentials
     GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
     GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
-    GITHUB_CLIENT_ID: process.env.GITHUB_CLIENT_ID,
-    GITHUB_CLIENT_SECRET: process.env.GITHUB_CLIENT_SECRET,
     BETTER_AUTH_SECRET: process.env.BETTER_AUTH_SECRET,
 
     // API keys
@@ -57,9 +50,6 @@ const env = createEnv({
     // Analytics
     NEXT_PUBLIC_POSTHOG_API_KEY: process.env.POSTHOG_API_KEY,
     NEXT_PUBLIC_POSTHOG_HOST: process.env.POSTHOG_HOST,
-
-    // Payments
-    DODO_API_KEY: process.env.DODO_API_KEY,
   },
 });
 

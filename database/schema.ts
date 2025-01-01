@@ -55,3 +55,36 @@ export const verifications = pgTable("verifications", {
   createdAt: timestamp("createdAt"),
   updatedAt: timestamp("updatedAt"),
 });
+
+export const competitors = pgTable("competitors", {
+  id: text("id").primaryKey(),
+  userId: text("userId")
+    .notNull()
+    .references(() => users.id),
+  url: text("url").notNull(),
+  createdAt: timestamp("createdAt").notNull().defaultNow(),
+});
+
+export const posts = pgTable("posts", {
+  id: text("id").primaryKey(),
+  userId: text("userId")
+    .notNull()
+    .references(() => users.id),
+  competitorId: text("competitorId").references(() => competitors.id),
+  postText: text("postText").notNull(),
+  postLink: text("postLink").notNull(),
+  postLikes: integer("postLikes").notNull(),
+  postComments: integer("postComments").notNull(),
+  postShares: integer("postShares").notNull(),
+  postedAt: timestamp("postedAt").notNull(),
+  createdAt: timestamp("createdAt").notNull().defaultNow(),
+});
+
+export const competitorAnalytics = pgTable("competitor_analytics", {
+  id: text("id").primaryKey(),
+  userId: text("userId")
+    .notNull()
+    .references(() => users.id),
+  analysis: text("analysis").notNull(),
+  createdAt: timestamp("createdAt").notNull().defaultNow(),
+});

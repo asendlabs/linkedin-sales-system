@@ -8,34 +8,34 @@ interface Feature {
 
 const features: Feature[] = [
   {
-    title: "Better-Auth + Resend",
+    title: "Competitor Analysis",
     description:
-      "Secure authentication system with magic link functionality and GitHub OAuth integration. Includes email delivery via Resend and session management.",
+      "Advanced competitor tracking with engagement metrics, content performance analysis, and audience growth patterns. Includes industry benchmark reporting and gap analysis tools.",
   },
   {
-    title: "Next.js 14 + TypeScript",
+    title: "Content Generation",
     description:
-      "Modern React framework with App Router and Server Components. Full TypeScript support with strict type checking and API route handlers.",
+      "AI-powered content creation system with industry-specific templates, viral post structures, and engagement optimization. Features scheduling tools and performance analytics.",
   },
   {
-    title: "Drizzle + PostgreSQL",
+    title: "Growth Strategy",
     description:
-      "Type-safe ORM with PostgreSQL integration. Features schema migrations, prepared statements, and optimized query building support.",
+      "Personalized growth roadmap with actionable milestones, network expansion tactics, and engagement strategies. Includes target audience analysis and connection optimization.",
   },
   {
-    title: "PostHog Analytics",
+    title: "Engagement Tracking",
     description:
-      "Complete analytics integration with event tracking and feature flags. Includes user segmentation tools and dashboard configuration.",
+      "Real-time monitoring of post performance, follower growth, and interaction metrics. Features detailed analytics dashboard and trend analysis tools.",
   },
   {
-    title: "shadcn/ui + Tailwind",
+    title: "Network Optimization",
     description:
-      "Accessible component library built on Radix UI primitives. Features responsive styling with Tailwind CSS and built-in theme support.",
+      "Smart connection management with industry targeting, relationship scoring, and outreach automation. Includes lead generation and conversion tracking.",
   },
   {
-    title: "Zod + React Hook Form",
+    title: "Performance Reports",
     description:
-      "Robust form validation with type-safe schemas and custom hooks. Includes client and server-side validation with seamless integration.",
+      "Comprehensive reporting suite with custom KPIs, growth metrics, and ROI analysis. Features exportable reports and automated insights generation.",
   },
 ];
 
@@ -44,7 +44,7 @@ const FeatureCard = ({ title, description }: Feature) => {
     <div className="flex flex-col items-start px-2 py-4">
       <Badge
         variant="outline"
-        className="flex w-full items-center justify-center rounded-full px-3 py-1 text-base font-medium text-orange-500"
+        className="flex w-full items-center justify-center rounded-full px-3 py-1 text-base font-medium text-primary"
       >
         {title}
       </Badge>
@@ -66,3 +66,5 @@ export function Features() {
     </div>
   );
 }
+
+export default Features;

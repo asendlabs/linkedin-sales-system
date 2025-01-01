@@ -12,7 +12,6 @@ import { Session } from "@/types/auth";
 
 const settingsTabs = [
   { name: "Account & Security", value: "account", icon: UserCircle },
-  { name: "Billing & Plans", value: "billing", icon: CreditCard },
   { name: "Emails & Notifications", value: "notifications", icon: Bell },
   { name: "Appearance", value: "appearance", icon: Palette },
 ];
@@ -54,7 +53,6 @@ export function Settings({
         {tab === "account" && (
           <AccountPage activeSessions={activeSessions} session={session} />
         )}
-        {/* {tab === "billing" && <BillingPage />} */}
         {tab === "notifications" && <NotificationPage />}
         {tab === "appearance" && <AppearancePage />}
       </main>

@@ -7,6 +7,7 @@ import { Toaster } from "sonner";
 import { ModeToggle } from "@/components/mode-toggle";
 import { CustomToaster } from "@/components/custom-toaster";
 import { createMetadata } from "@/lib/metadata";
+import { GeistSans } from "geist/font/sans";
 import { APP_NAME } from "@/constants";
 import { PostHogProvider } from "@/providers/posthog-provider";
 
@@ -27,7 +28,7 @@ export default function RootLayout({
     <ViewTransitions>
       <html lang="en">
         <PostHogProvider>
-          <body>
+          <body className={GeistSans.className}>
             <NuqsAdapter>
               <ThemeProvider
                 attribute={"class"}

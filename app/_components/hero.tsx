@@ -1,6 +1,6 @@
-import React from "react";
+  import React from "react";
 import { Badge } from "@/components/ui/badge";
-import { Circle, GithubIcon } from "lucide-react";
+import { Calendar, Circle, GithubIcon } from "lucide-react";
 import Link from "next/link";
 
 export function Hero() {
@@ -10,16 +10,16 @@ export function Hero() {
         <Link href="https://github.com/asendlabs/startstack">
           <Badge
             variant={"outline"}
-            className="group flex w-fit gap-1 rounded-full px-3 py-1.5 text-orange-500"
+            className="group flex w-fit gap-1 rounded-full px-3 py-1.5 text-primary"
           >
-            <GithubIcon className="mr-1 size-3" />
+            <Calendar className="mr-1 size-3" />
             <p className="cursor-pointer group-hover:underline">
-              Fork the <span>repo</span> to get started.
+              Schedule a free demo to get beta access.
             </p>
           </Badge>
         </Link>
         <h1 className="max-w-[41.5rem] break-words text-center text-4xl font-bold text-black dark:text-white md:text-5xl">
-          The easiest way to get started with your next saas project.
+          Starting growing your LinkedIn account with AI.
         </h1>
       </div>
     </section>
