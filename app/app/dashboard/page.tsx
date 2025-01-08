@@ -6,15 +6,15 @@ import Loading from "@/app/loading";
 
 export const metadata: Metadata = {
   title: {
-    default: "Home",
-    template: "%s | Home",
+    default: "Dashboard",
+    template: "%s | Dashboard",
   },
 };
 
-export default function HomeRoute() {
+export default function DashboardRoute() {
   return (
     <main>
-      <PageTitle selfLabel="Home" />
+      <PageTitle selfLabel="Dashboard" />
       <section></section>
     </main>
   );

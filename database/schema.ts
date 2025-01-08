@@ -65,21 +65,6 @@ export const competitors = pgTable("competitors", {
   createdAt: timestamp("createdAt").notNull().defaultNow(),
 });
 
-export const posts = pgTable("posts", {
-  id: text("id").primaryKey(),
-  userId: text("userId")
-    .notNull()
-    .references(() => users.id),
-  competitorId: text("competitorId").references(() => competitors.id),
-  postText: text("postText").notNull(),
-  postLink: text("postLink").notNull(),
-  postLikes: integer("postLikes").notNull(),
-  postComments: integer("postComments").notNull(),
-  postShares: integer("postShares").notNull(),
-  postedAt: timestamp("postedAt").notNull(),
-  createdAt: timestamp("createdAt").notNull().defaultNow(),
-});
-
 export const competitorAnalytics = pgTable("competitor_analytics", {
   id: text("id").primaryKey(),
   userId: text("userId")

@@ -41,13 +41,45 @@ const getKey = async () => {
   ]);
 };
 
-// Encrypt data
+// Function to strip large data before caching
+const prepareDataForCache = (data: SessionResponse): SessionResponse => {
+  if (!data) return data;
+
+  // Create a shallow copy of the data
+  const preparedData = { ...data };
+
+  // Create a shallow copy of the user object
+  preparedData.user = { ...data.user };
+
+  // Remove the image if it's a large base64 string
+  if (preparedData.user.image?.startsWith("data:image")) {
+    preparedData.user.image = null;
+  }
+
+  return preparedData;
+};
+
+// Encrypt data with size check
 const encryptData = async (
   data: SessionResponse | null,
 ): Promise<string | null> => {
   try {
+    if (!data) return null;
+
+    // Prepare data for caching by removing large fields
+    const preparedData = prepareDataForCache(data);
+
     const key = await getKey();
-    const jsonString = JSON.stringify(data);
+    const jsonString = JSON.stringify(preparedData);
+
+    // Check size before proceeding
+    const estimatedSize = new Blob([jsonString]).size;
+    if (estimatedSize > 5 * 1024 * 1024) {
+      // 5MB limit
+      console.warn("Data too large for caching");
+      return null;
+    }
+
     const encoder = new TextEncoder();
     const encodedData = encoder.encode(jsonString);
 
@@ -72,11 +104,20 @@ const encryptData = async (
   }
 };
 
-// Decrypt data
+// Decrypt data with safety checks
 const decryptData = async (
   encryptedData: string,
 ): Promise<SessionResponse | null> => {
   try {
+    if (!encryptedData) return null;
+
+    // Basic size check before processing
+    if (encryptedData.length > 7 * 1024 * 1024) {
+      // 7MB limit for base64
+      console.warn("Encrypted data too large");
+      return null;
+    }
+
     const key = await getKey();
     const combined = Uint8Array.from(atob(encryptedData), (c) =>
       c.charCodeAt(0),
@@ -103,7 +144,7 @@ const decryptData = async (
   }
 };
 
-// Custom hook for caching session
+// Custom hook for caching session with error handling
 export const useCachedSession = () => {
   const { data: sessionData, isPending: isSessionPending } =
     authClient.useSession();
@@ -112,14 +153,21 @@ export const useCachedSession = () => {
 
   useEffect(() => {
     const loadCachedData = async () => {
-      const cached = localStorage.getItem("cache-user-session");
-      if (cached) {
-        const decrypted = await decryptData(cached);
-        if (decrypted) {
-          setCachedData(decrypted);
+      try {
+        const cached = localStorage.getItem("cache-user-session");
+        if (cached) {
+          const decrypted = await decryptData(cached);
+          if (decrypted) {
+            setCachedData(decrypted);
+          }
         }
+      } catch (error) {
+        console.error("Error loading cached data:", error);
+        // Clear corrupted cache
+        localStorage.removeItem("cache-user-session");
+      } finally {
+        setIsLoading(false);
       }
-      setIsLoading(false);
     };
 
     loadCachedData();
@@ -128,10 +176,14 @@ export const useCachedSession = () => {
   useEffect(() => {
     const updateCache = async () => {
       if (sessionData) {
-        const encrypted = await encryptData(sessionData);
-        if (encrypted) {
-          localStorage.setItem("cache-user-session", encrypted);
-          setCachedData(sessionData);
+        try {
+          const encrypted = await encryptData(sessionData);
+          if (encrypted) {
+            localStorage.setItem("cache-user-session", encrypted);
+            setCachedData(sessionData);
+          }
+        } catch (error) {
+          console.error("Error updating cache:", error);
         }
       }
     };
@@ -140,8 +192,7 @@ export const useCachedSession = () => {
   }, [sessionData]);
 
   return {
-    data: cachedData || sessionData,
+    data: sessionData || cachedData, // Prioritize live session data over cached
     isPending: isLoading && isSessionPending,
   };
 };
-

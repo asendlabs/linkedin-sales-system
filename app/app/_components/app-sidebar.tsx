@@ -32,8 +32,8 @@ import { cn } from "@/lib/utils";
 
 const navigation = [
   {
-    title: "Home",
-    url: "/app/home",
+    title: "Dashboard",
+    url: "/app/dashboard",
     icon: Home,
   },
   {
@@ -55,13 +55,38 @@ const navigation = [
 
 export function AppSidebar() {
   const pathName = usePathname();
+  const router = useRouter();
   const { open } = useSidebar();
+  const [isMounted, setIsMounted] = React.useState(false);
+
+  React.useEffect(() => {
+    setIsMounted(true);
+    const routes = [
+      ...navigation.map((item) => item.url),
+      "/settings?page=account",
+    ];
+
+    routes.forEach((url) => {
+      router.prefetch(url);
+    });
+  }, [router]);
+
+  if (!isMounted) {
+    return (
+      <div className="flex h-screen w-[var(--sidebar-width)] items-center justify-center">
+        <Loader2 className="h-6 w-6 animate-spin" />
+      </div>
+    );
+  }
 
   return (
     <Sidebar collapsible="icon" variant="inset">
-      <SidebarHeader className={cn("flex flex-row items-center border-b py-3 text-sm font-semibold", 
-        open ? "px-4" : "justify-center"
-      )}>
+      <SidebarHeader
+        className={cn(
+          "flex flex-row items-center py-3 text-sm font-semibold",
+          open ? "px-4" : "justify-center",
+        )}
+      >
         <Logo className="m-0 size-5 p-1" />
         {open && <>LinkedIn Growth System</>}
       </SidebarHeader>
@@ -71,7 +96,7 @@ export function AppSidebar() {
             {navigation.map((item) => (
               <SidebarMenuItem key={item.title}>
                 <SidebarMenuButton asChild isActive={item.url === pathName}>
-                  <Link href={item.url} prefetch={true}>
+                  <Link href={item.url}>
                     {item.icon && <item.icon />}
                     <span>{item.title}</span>
                   </Link>
@@ -84,7 +109,7 @@ export function AppSidebar() {
       <SidebarFooter>
         <UserButton />
       </SidebarFooter>
-      <SidebarRail />
+      {/* <SidebarRail /> */}
     </Sidebar>
   );
 }

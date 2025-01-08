@@ -48,7 +48,7 @@ export const authActionClient = actionClient
       throw new Error("You are not authorized to perform this action");
     }
     const extraUtils = {
-      authenticatedUrl: "/app/home",
+      authenticatedUrl: "/app/dashboard",
       unauthenticatedUrl: "/login",
       appName: APP_NAME,
     };

@@ -8,12 +8,12 @@ export default function NotFound() {
         Uh, oh. We couldn't find that page.
       </h2>
       <Link
-        href="/app/home"
+        href="/app/dashboard"
         className="flex items-center gap-2 rounded-lg border border-input px-3 py-2 hover:bg-muted"
         prefetch={true}
       >
         <ArrowLeft className="size-5" />
-        Return Home
+        Return Dashboard
       </Link>
     </main>
   );

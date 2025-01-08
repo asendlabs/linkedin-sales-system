@@ -36,7 +36,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "app/app/home/_components/random-toast.tsx"
+    "app/app/dashboard/_components/random-toast.tsx"
   ],
   "exclude": [
     "node_modules"

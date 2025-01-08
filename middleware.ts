@@ -19,7 +19,7 @@ export default async function authMiddleware(request: NextRequest) {
   );
 
   if (session && isAuthPage) {
-    return NextResponse.redirect(new URL("/app/home", request.url));
+    return NextResponse.redirect(new URL("/app/dashboard", request.url));
   }
 
   if (!session && isAppPage) {

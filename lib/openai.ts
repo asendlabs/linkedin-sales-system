@@ -1,7 +1,8 @@
-import { ClientOptions, OpenAI } from "openai";
+import env from "@/env";
+import { OpenAI } from "openai";
 
 export const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-  organization: process.env.OPENAI_ORG_ID,
-  project: process.env.OPENAI_PROJECT_ID,
+  apiKey: env.OPENAI_API_KEY,
+  organization: env.OPENAI_ORG_ID,
+  project: env.OPENAI_PROJECT_ID,
 });

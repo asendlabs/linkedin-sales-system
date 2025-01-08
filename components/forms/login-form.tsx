@@ -46,7 +46,7 @@ export function LoginForm() {
       }, 250);
       const result = await signIn.magicLink({
         email: data.email,
-        callbackURL: "/app/home",
+        callbackURL: "/app/dashboard",
       });
 
       if (result.error) {
@@ -67,7 +67,7 @@ export function LoginForm() {
       setLoading(true);
       await signIn.social({
         provider: "github",
-        callbackURL: "/app/home",
+        callbackURL: "/app/dashboard",
       });
     } catch (error) {
       toast.error(

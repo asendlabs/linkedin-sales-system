@@ -15,6 +15,11 @@ const env = createEnv({
 
     // API keys
     RESEND_API_KEY: z.string(),
+
+    // OpenAI
+    OPENAI_API_KEY: z.string(),
+    OPENAI_ORG_ID: z.string(),
+    OPENAI_PROJECT_ID: z.string(),
   },
 
   // Client-side public environment variables
@@ -50,6 +55,11 @@ const env = createEnv({
     // Analytics
     NEXT_PUBLIC_POSTHOG_API_KEY: process.env.POSTHOG_API_KEY,
     NEXT_PUBLIC_POSTHOG_HOST: process.env.POSTHOG_HOST,
+
+    // OpenAI
+    OPENAI_API_KEY: process.env.OPENAI_API_KEY,
+    OPENAI_ORG_ID: process.env.OPENAI_ORG_ID,
+    OPENAI_PROJECT_ID: process.env.OPENAI_PROJECT_ID,
   },
 });
 
